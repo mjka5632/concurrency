@@ -14,13 +14,13 @@ public class SingletonExample7 {
 
     }
 
-    public SingletonExample7 getsignle(){
+    public static SingletonExample7 getsignle() {
 
         return Singleton.INSTANCE.getsignle();
 
     }
 
-    private enum Singleton{
+    private enum Singleton {
         INSTANCE;
 
         private SingletonExample7 example7;
@@ -29,10 +29,10 @@ public class SingletonExample7 {
          * JVM保证这个方法只会执行一次
          */
         Singleton() {
-             example7 = new SingletonExample7();
+            example7 = new SingletonExample7();
         }
 
-        public SingletonExample7 getsignle(){
+        public SingletonExample7 getsignle() {
             return example7;
         }
     }
