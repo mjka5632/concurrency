@@ -1,16 +1,18 @@
-package com.mmall.concurrency;
+package com.mmall.concurrency.example.atomic;
 
-import com.mmall.concurrency.annotations.NotThreadSafe;
+import com.mmall.concurrency.annotations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
-@NotThreadSafe
-public class ConcurrencyTest {
+@ThreadSafe
+public class AtomicExample2 {
     /**
      * 请求总数
      */
@@ -20,7 +22,7 @@ public class ConcurrencyTest {
      */
     public static int threadTotal = 200;
 
-    public static int count = 0;
+    public static AtomicLong count = new AtomicLong(0);
 
     public static void main(String[] args) throws Exception {
 
@@ -44,12 +46,13 @@ public class ConcurrencyTest {
         }
 
         countDownLatch.await();
-        log.info("count:{}", count);
+        log.info("count:{}", count.get());
 
     }
 
     public static void add() {
-        count++;
+//        count.incrementAndGet();
+        count.getAndIncrement();
     }
 
 }
