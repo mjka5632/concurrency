@@ -9,6 +9,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * AtomicInteger
+ */
 @Slf4j
 @ThreadSafe
 public class AtomicExample1 {
@@ -20,14 +23,17 @@ public class AtomicExample1 {
      * 允许最大并发量
      */
     public static int threadTotal = 200;
-
+    /**
+     *
+     */
     public static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String[] args) throws Exception {
-
-
+        //创建线程池
         ExecutorService executorService = Executors.newCachedThreadPool();
+        //信号量
         final Semaphore semaphore = new Semaphore(threadTotal);
+        //计数器
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
 
         for (int i = 0; i < clientTotal; i++) {

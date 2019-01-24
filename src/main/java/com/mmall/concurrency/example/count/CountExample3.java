@@ -1,21 +1,16 @@
-package com.mmall.concurrency.example.atomic;
+package com.mmall.concurrency.example.count;
 
-import com.mmall.concurrency.annotations.ThreadSafe;
+import com.mmall.concurrency.annotations.NotThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.LongAdder;
 
-/**
- * LongAddr
- */
 @Slf4j
-@ThreadSafe
-public class AtomicExample3 {
+@NotThreadSafe
+public class CountExample3 {
     /**
      * 请求总数
      */
@@ -24,8 +19,10 @@ public class AtomicExample3 {
      * 允许最大并发量
      */
     public static int threadTotal = 200;
-
-    public static LongAdder count = new LongAdder();
+    /**
+     * volatile关键字刷新到住内存中
+     */
+    public static volatile int count = 0;
 
     public static void main(String[] args) throws Exception {
 
@@ -54,7 +51,7 @@ public class AtomicExample3 {
     }
 
     public static void add() {
-        count.increment();
+        count++;
     }
 
 }
